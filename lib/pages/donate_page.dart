@@ -211,6 +211,49 @@ class _DonatePageState extends State<DonatePage> {
                 ),
               ),
 
+              // Selected Photos Display (if any)
+              if (_selectedImages.isNotEmpty) ...[
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Selected Photos (${_selectedImages.length})',
+                        style: GoogleFonts.plusJakartaSans(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: const Color(0xFF1C120D),
+                          height: 20 / 16,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Container(
+                        height: 100,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: _selectedImages.length,
+                          itemBuilder: (context, index) {
+                            return Container(
+                              margin: const EdgeInsets.only(right: 8),
+                              width: 80,
+                              height: 80,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                image: DecorationImage(
+                                  image: FileImage(File(_selectedImages[index].path)),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+
               // Description Section Title
               Container(
                 padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),

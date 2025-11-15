@@ -105,7 +105,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                     Container(
                       padding: const EdgeInsets.fromLTRB(16, 4, 16, 12),
                       child: Text(
-                        'This backpack is perfect for carrying books and laptops. It\'s durable and has multiple compartments.',
+                        'This essential knife set features razor-sharp precision blades for every kitchen prep task.',
                         style: GoogleFonts.inter(
                           fontSize: 16,
                           fontWeight: FontWeight.normal,
@@ -274,21 +274,69 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                         children: [
                           // Request Button
                           Expanded(
-                            child: Container(
-                              height: 48,
-                              margin: const EdgeInsets.only(right: 12),
-                              decoration: BoxDecoration(
-                                color: const Color(0xFFF07538), // #f07538
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'Request',
-                                  style: GoogleFonts.inter(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: const Color(0xFF1C120D), // #1c120d
-                                    height: 24 / 16, // line height
+                            child: GestureDetector(
+                              onTap: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      backgroundColor: const Color(0xFFFCFAF7),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                      title: Text(
+                                        'Request Completed!',
+                                        textAlign: TextAlign.center,
+                                        style: GoogleFonts.inter(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          color: const Color(0xFF1C120D),
+                                        ),
+                                      ),
+                                      content: Text(
+                                        'Your borrowing request has been successfully submitted.',
+                                        textAlign: TextAlign.center,
+                                        style: GoogleFonts.inter(
+                                          fontSize: 16,
+                                          color: const Color(0xFF1C120D),
+                                        ),
+                                      ),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop(); // Close dialog
+                                            Navigator.of(context).pop(); // Go back to lend page
+                                          },
+                                          child: Text(
+                                            'OK',
+                                            style: GoogleFonts.inter(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: const Color(0xFFF07538),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                              child: Container(
+                                height: 48,
+                                margin: const EdgeInsets.only(right: 12),
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFFF07538), // #f07538
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    'Request',
+                                    style: GoogleFonts.inter(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: const Color(0xFFFCFAF7), // White text for orange background
+                                      height: 24 / 16, // line height
+                                    ),
                                   ),
                                 ),
                               ),
@@ -296,20 +344,68 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                           ),
                           //Delivery  Button
                           Expanded(
-                            child: Container(
-                              height: 48,
-                              decoration: BoxDecoration(
-                                color: const Color(0xFFF2EBE8), // #f2ebe8
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'Delivery',
-                                  style: GoogleFonts.inter(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                    height: 24 / 16, // line height
+                            child: GestureDetector(
+                              onTap: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      backgroundColor: const Color(0xFFFCFAF7),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                      title: Text(
+                                        'Request Completed!',
+                                        textAlign: TextAlign.center,
+                                        style: GoogleFonts.inter(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          color: const Color(0xFF1C120D),
+                                        ),
+                                      ),
+                                      content: Text(
+                                        'Your delivery request has been successfully submitted.',
+                                        textAlign: TextAlign.center,
+                                        style: GoogleFonts.inter(
+                                          fontSize: 16,
+                                          color: const Color(0xFF1C120D),
+                                        ),
+                                      ),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop(); // Close dialog
+                                            Navigator.of(context).pop(); // Go back to lend page
+                                          },
+                                          child: Text(
+                                            'OK',
+                                            style: GoogleFonts.inter(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: const Color(0xFFF07538),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                              child: Container(
+                                height: 48,
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFF00BCD4), // Cyan color for delivery
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    'Delivery',
+                                    style: GoogleFonts.inter(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                      height: 24 / 16, // line height
+                                    ),
                                   ),
                                 ),
                               ),
