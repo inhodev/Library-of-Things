@@ -345,13 +345,11 @@ class _DonatePageState extends State<DonatePage> {
                       width: 56,
                       height: 56,
                       decoration: BoxDecoration(
-                        color: Colors.grey[300],
                         borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: const Icon(
-                        Icons.book,
-                        color: Color(0xFF1C120D),
-                        size: 24,
+                        image: const DecorationImage(
+                          image: AssetImage('assets/images/dummy_data/Textbook.png'),
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                     const SizedBox(width: 16),
@@ -396,13 +394,11 @@ class _DonatePageState extends State<DonatePage> {
                       width: 56,
                       height: 56,
                       decoration: BoxDecoration(
-                        color: Colors.grey[300],
                         borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: const Icon(
-                        Icons.calculate,
-                        color: Color(0xFF1C120D),
-                        size: 24,
+                        image: const DecorationImage(
+                          image: AssetImage('assets/images/dummy_data/calculator.png'),
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                     const SizedBox(width: 16),

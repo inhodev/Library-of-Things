@@ -48,13 +48,11 @@ class _MyPageState extends State<MyPage> {
                       width: 128,
                       height: 128,
                       decoration: BoxDecoration(
-                        color: Colors.grey[300],
                         borderRadius: BorderRadius.circular(64),
-                      ),
-                      child: const Icon(
-                        Icons.person,
-                        size: 64,
-                        color: Color(0xFF1C140D),
+                        image: const DecorationImage(
+                          image: AssetImage('assets/images/dummy_data/profile_image.png'),
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                     const SizedBox(width: 16),
@@ -64,15 +62,78 @@ class _MyPageState extends State<MyPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          // Name
-                          Text(
-                            'Ethan Lee',
-                            style: GoogleFonts.plusJakartaSans(
-                              fontSize: 22,
-                              fontWeight: FontWeight.bold,
-                              color: const Color(0xFF1C140D), // #1c140d
-                              height: 28 / 22, // line height
-                            ),
+                          // Name and QR Button
+                          Row(
+                            children: [
+                              Text(
+                                'Ethan Lee',
+                                style: GoogleFonts.plusJakartaSans(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold,
+                                  color: const Color(0xFF1C140D), // #1c140d
+                                  height: 28 / 22, // line height
+                                ),
+                              ),
+                              const SizedBox(width: 12),
+                              GestureDetector(
+                                onTap: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        backgroundColor: const Color(0xFFFCFAF7),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(12),
+                                        ),
+                                        content: Container(
+                                          width: 300,
+                                          height: 300,
+                                          child: Image.asset(
+                                            'assets/images/dummy_data/QRcode.png',
+                                            fit: BoxFit.cover,
+                                            errorBuilder: (context, error, stackTrace) {
+                                              debugPrint('QR Code image error: $error');
+                                              return Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.circular(12),
+                                                  color: Colors.grey[200],
+                                                ),
+                                                child: const Center(
+                                                  child: Text(
+                                                    'QR Code\n(Image load failed)',
+                                                    textAlign: TextAlign.center,
+                                                    style: TextStyle(
+                                                      fontSize: 18,
+                                                      color: Color(0xFF1C140D),
+                                                    ),
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFFF07538), // #f07538
+                                    borderRadius: BorderRadius.circular(16),
+                                  ),
+                                  child: Text(
+                                    'QR CODE',
+                                    style: GoogleFonts.plusJakartaSans(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                      height: 18 / 12,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                           const SizedBox(height: 4),
                           // Student ID
@@ -88,11 +149,11 @@ class _MyPageState extends State<MyPage> {
                           const SizedBox(height: 4),
                           // Rating
                           Text(
-                            '5 stars',
+                            '⭐⭐⭐⭐⭐',
                             style: GoogleFonts.plusJakartaSans(
                               fontSize: 16,
                               fontWeight: FontWeight.normal,
-                              color: const Color(0xFF99734D), // #99734d
+                              color: const Color(0xFFFFD700), // Gold color for stars
                               height: 24 / 16, // line height
                             ),
                           ),
