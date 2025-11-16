@@ -17,6 +17,14 @@ class _DonatePageState extends State<DonatePage> {
   String? _selectedCategory;
   List<XFile> _selectedImages = [];
 
+  void _resetForm() {
+    setState(() {
+      _selectedCategory = null;
+      _selectedImages.clear();
+      _additionalNotesController.clear();
+    });
+  }
+
   final List<String> _categories = [
     'Kitchenware',
     'Technology',
@@ -67,7 +75,7 @@ class _DonatePageState extends State<DonatePage> {
                 padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
                 child: Center(
                   child: Text(
-                    'Donate',
+                    'LOT',
                     style: GoogleFonts.plusJakartaSans(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -324,10 +332,11 @@ class _DonatePageState extends State<DonatePage> {
                             ),
                           ),
                           actions: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                            _resetForm();
+                                          },
                               child: Text(
                                 'OK',
                                 style: GoogleFonts.plusJakartaSans(

@@ -13,8 +13,17 @@ class _DeliveryPageState extends State<DeliveryPage> {
   final TextEditingController _card2Controller = TextEditingController();
   final TextEditingController _card3Controller = TextEditingController();
   final TextEditingController _card4Controller = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
 
   bool _isPaymentCompleted = false;
+  String _deliveryStatus = 'Not In Transit'; // 초기 상태: 배송 중 아님
+  String _currentAddress = '123 University Street, Incheon, South Korea';
+
+  @override
+  void initState() {
+    super.initState();
+    _addressController.text = _currentAddress;
+  }
 
   @override
   void dispose() {
@@ -22,7 +31,80 @@ class _DeliveryPageState extends State<DeliveryPage> {
     _card2Controller.dispose();
     _card3Controller.dispose();
     _card4Controller.dispose();
+    _addressController.dispose();
     super.dispose();
+  }
+
+  void _showEditAddressDialog() {
+    _addressController.text = _currentAddress;
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: const Color(0xFFFCFAF7),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          title: Text(
+            'Edit Delivery Address',
+            style: GoogleFonts.inter(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: const Color(0xFF1C140D),
+            ),
+          ),
+          content: TextField(
+            controller: _addressController,
+            maxLines: 3,
+            decoration: InputDecoration(
+              hintText: 'Enter your delivery address',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: const BorderSide(color: Color(0xFFE8D6CF)),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: const BorderSide(color: Color(0xFFF07538)),
+              ),
+            ),
+            style: GoogleFonts.inter(
+              fontSize: 16,
+              color: const Color(0xFF1C140D),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                'Cancel',
+                style: GoogleFonts.inter(
+                  fontSize: 16,
+                  color: const Color(0xFF99734D),
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                setState(() {
+                  _currentAddress = _addressController.text;
+                });
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                'Save',
+                style: GoogleFonts.inter(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: const Color(0xFFF07538),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -33,22 +115,79 @@ class _DeliveryPageState extends State<DeliveryPage> {
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           padding: const EdgeInsets.only(bottom: 80), // Much more bottom padding
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Header
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Main Header - LOT
+            Container(
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+              child: Center(
+                child: Text(
+                  'LOT',
+                  style: GoogleFonts.inter(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: const Color(0xFF1C140D), // #1c140d
+                    height: 23 / 18, // line height
+                  ),
+                ),
+              ),
+            ),
+
+            // Header - Delivery Address Section
               Container(
                 padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
-                child: Center(
-                  child: Text(
-                    'Delivery Address',
-                    style: GoogleFonts.inter(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: const Color(0xFF1C140D), // #1c140d
-                      height: 23 / 18, // line height
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Title Row
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                          // Delivery Address Title
+                          Text(
+                            'Address',
+                            style: GoogleFonts.inter(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: const Color(0xFF1C140D), // #1c140d
+                              height: 23 / 18, // line height
+                            ),
+                          ),
+                        // Registration Button
+                        GestureDetector(
+                          onTap: _showEditAddressDialog,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFF07538), // #f07538
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: Text(
+                              'Edit Address',
+                              style: GoogleFonts.inter(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                                height: 18 / 12,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
+                    const SizedBox(height: 4),
+                    // Address Text
+                    Text(
+                      _currentAddress,
+                      style: GoogleFonts.inter(
+                        fontSize: 14,
+                        fontWeight: FontWeight.normal,
+                        color: const Color(0xFF99734D), // #99734d
+                        height: 21 / 14, // line height
+                      ),
+                    ),
+                  ],
                 ),
               ),
 
@@ -143,7 +282,7 @@ class _DeliveryPageState extends State<DeliveryPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'In Transit',
+                            _deliveryStatus,
                             style: GoogleFonts.inter(
                               fontSize: 16,
                               fontWeight: FontWeight.w500,
@@ -151,15 +290,18 @@ class _DeliveryPageState extends State<DeliveryPage> {
                               height: 24 / 16, // line height
                             ),
                           ),
-                          Text(
-                            'Estimated Arrival: 2:00 PM',
-                            style: GoogleFonts.inter(
-                              fontSize: 14,
-                              fontWeight: FontWeight.normal,
-                              color: const Color(0xFF99734D), // #99734d
-                              height: 21 / 14, // line height
+                          // Only show estimated arrival when in transit
+                          if (_deliveryStatus != 'Not In Transit') ...[
+                            Text(
+                              'Estimated Arrival: 2:00 PM',
+                              style: GoogleFonts.inter(
+                                fontSize: 14,
+                                fontWeight: FontWeight.normal,
+                                color: const Color(0xFF99734D), // #99734d
+                                height: 21 / 14, // line height
+                              ),
                             ),
-                          ),
+                          ],
                         ],
                       ),
                     ),
@@ -328,7 +470,7 @@ class _DeliveryPageState extends State<DeliveryPage> {
                             ),
                           ),
                           content: Text(
-                            'Your delivery request has been successfully processed. \nThe item will be delivered soon.',
+                            'Your delivery request has been successfully processed. \nThe item will be prepared soon.',
                             style: GoogleFonts.inter(
                               fontSize: 16,
                               color: const Color(0xFF1C140D),
@@ -340,6 +482,7 @@ class _DeliveryPageState extends State<DeliveryPage> {
                                 Navigator.of(context).pop();
                                 setState(() {
                                   _isPaymentCompleted = true;
+                                  _deliveryStatus = 'Preparing'; // 상태를 "준비중"으로 변경
                                 });
                               },
                               child: Text(

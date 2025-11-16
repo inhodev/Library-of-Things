@@ -4,6 +4,37 @@ import 'package:google_fonts/google_fonts.dart';
 class RulesSafetyPage extends StatelessWidget {
   const RulesSafetyPage({super.key});
 
+  Widget _buildBulletPoint(String text) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            '• ',
+            style: GoogleFonts.plusJakartaSans(
+              fontSize: 16,
+              fontWeight: FontWeight.normal,
+              color: const Color(0xFF1C140D),
+              height: 24 / 16,
+            ),
+          ),
+          Expanded(
+            child: Text(
+              text,
+              style: GoogleFonts.plusJakartaSans(
+                fontSize: 16,
+                fontWeight: FontWeight.normal,
+                color: const Color(0xFF1C140D),
+                height: 24 / 16,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,7 +90,7 @@ class RulesSafetyPage extends StatelessWidget {
                   children: [
                     // Main Title
                     Text(
-                      'Terms of Service',
+                      'Rules and Safety Guidelines for Users',
                       style: GoogleFonts.plusJakartaSans(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
@@ -67,23 +98,11 @@ class RulesSafetyPage extends StatelessWidget {
                         height: 30 / 24,
                       ),
                     ),
-                    const SizedBox(height: 16),
-
-                    // Introduction
-                    Text(
-                      'By using the Inha Exchange Item Share service, you agree to abide by the following terms and conditions. Failure to comply may result in suspension or termination of your account.',
-                      style: GoogleFonts.plusJakartaSans(
-                        fontSize: 16,
-                        fontWeight: FontWeight.normal,
-                        color: const Color(0xFF1C140D),
-                        height: 24 / 16,
-                      ),
-                    ),
                     const SizedBox(height: 24),
 
-                    // Late Fees Section
+                    // 1. Borrowing Rules Section
                     Text(
-                      'Late Fees',
+                      '1. Borrowing Rules',
                       style: GoogleFonts.plusJakartaSans(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -92,20 +111,15 @@ class RulesSafetyPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 8),
-                    Text(
-                      'Items must be returned by the agreed-upon due date. Late returns will incur a fee of \$5 per day, up to a maximum of \$50. Fees must be paid within 7 days of the due date.',
-                      style: GoogleFonts.plusJakartaSans(
-                        fontSize: 16,
-                        fontWeight: FontWeight.normal,
-                        color: const Color(0xFF1C140D),
-                        height: 24 / 16,
-                      ),
-                    ),
+                    _buildBulletPoint('Users must be registered students of the university.'),
+                    _buildBulletPoint('Each item can be borrowed for a limited period (Depends of the item).'),
+                    _buildBulletPoint('Users can borrow a maximum number of items at a time (3).'),
+                    _buildBulletPoint('Items must be returned on time. Late returns may incur a penalty or temporary borrowing restriction.'),
                     const SizedBox(height: 24),
 
-                    // Item Condition Section
+                    // 2. Item Care Section
                     Text(
-                      'Item Condition',
+                      '2. Item Care',
                       style: GoogleFonts.plusJakartaSans(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -114,15 +128,58 @@ class RulesSafetyPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 8),
+                    _buildBulletPoint('Handle all items with care.'),
+                    _buildBulletPoint('Clean items before returning if necessary (kitchenware, blankets, etc).'),
+                    _buildBulletPoint('Report any damage or malfunction immediately through the app.'),
+                    const SizedBox(height: 24),
+
+                    // 3. Safety Guidelines Section
                     Text(
-                      'Users are responsible for returning items in the same condition as received, barring normal wear and tear. Damage beyond normal use will result in a repair or replacement fee, determined by the item\'s value and extent of damage.',
+                      '3. Safety Guidelines',
                       style: GoogleFonts.plusJakartaSans(
-                        fontSize: 16,
-                        fontWeight: FontWeight.normal,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
                         color: const Color(0xFF1C140D),
-                        height: 24 / 16,
+                        height: 23 / 18,
                       ),
                     ),
+                    const SizedBox(height: 8),
+                    _buildBulletPoint('Follow manufacturer or campus safety instructions for each item.'),
+                    _buildBulletPoint('Do not use items for purposes other than intended.'),
+                    _buildBulletPoint('Avoid sharing personal items (e.g., headphones, personal electronics) for hygiene reasons.'),
+                    _buildBulletPoint('Notify staff if an item is unsafe or broken.'),
+                    const SizedBox(height: 24),
+
+                    // 4. Responsibility and Accountability Section
+                    Text(
+                      '4. Responsibility and Accountability',
+                      style: GoogleFonts.plusJakartaSans(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: const Color(0xFF1C140D),
+                        height: 23 / 18,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    _buildBulletPoint('Borrowers are responsible for any lost, stolen or damaged items.'),
+                    _buildBulletPoint('Fees may apply for replacing damaged or missing items.'),
+                    _buildBulletPoint('Repeated violations may result in loss of borrowing privileges.'),
+                    const SizedBox(height: 24),
+
+                    // 5. Community Respect Section
+                    Text(
+                      '5. Community Respect',
+                      style: GoogleFonts.plusJakartaSans(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: const Color(0xFF1C140D),
+                        height: 23 / 18,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    _buildBulletPoint('Treat all users, staff and items with respect.'),
+                    _buildBulletPoint('Encourage others to borrow responsibly.'),
+                    _buildBulletPoint('Give feedback or suggestions to improve the Library of Things service.'),
                     const SizedBox(height: 24),
 
                     // Additional spacing at bottom

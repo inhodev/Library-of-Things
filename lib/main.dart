@@ -82,7 +82,7 @@ class _MainPageState extends State<MainPage> {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          'Lend',
+                          'Borrow',
                           style: GoogleFonts.plusJakartaSans(
                             fontSize: 12,
                             fontWeight: FontWeight.w500,

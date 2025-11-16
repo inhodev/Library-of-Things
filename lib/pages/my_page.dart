@@ -11,7 +11,7 @@ class MyPage extends StatefulWidget {
 }
 
 class _MyPageState extends State<MyPage> {
-  int _selectedHistoryTab = 0; // 0: Donations, 1: Borrowings
+  int _selectedHistoryTab = 0; // 0: Borrowings, 1: Donations
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class _MyPageState extends State<MyPage> {
                 padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
                 child: Center(
                   child: Text(
-                    'My Page',
+                    'LOT',
                     style: GoogleFonts.plusJakartaSans(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -247,7 +247,7 @@ class _MyPageState extends State<MyPage> {
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Row(
                   children: [
-                    // Donations Tab
+                    // Borrowings Tab (now first)
                     Expanded(
                       child: GestureDetector(
                         onTap: () => setState(() => _selectedHistoryTab = 0),
@@ -265,7 +265,7 @@ class _MyPageState extends State<MyPage> {
                           ),
                           child: Center(
                             child: Text(
-                              'Donations',
+                              'Borrowed Items',
                               style: GoogleFonts.plusJakartaSans(
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold,
@@ -280,7 +280,7 @@ class _MyPageState extends State<MyPage> {
                       ),
                     ),
                     const SizedBox(width: 32),
-                    // Borrowings Tab
+                    // Donations Tab (now second)
                     Expanded(
                       child: GestureDetector(
                         onTap: () => setState(() => _selectedHistoryTab = 1),
@@ -298,7 +298,7 @@ class _MyPageState extends State<MyPage> {
                           ),
                           child: Center(
                             child: Text(
-                              'Borrowings',
+                              'Donated Items',
                               style: GoogleFonts.plusJakartaSans(
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold,
@@ -316,60 +316,8 @@ class _MyPageState extends State<MyPage> {
                 ),
               ),
 
-              // History Items (Donations)
+              // History Items (Borrowed Items)
               if (_selectedHistoryTab == 0) ...[
-                // Calculator Item
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 56,
-                        height: 56,
-                        decoration: BoxDecoration(
-                          color: Colors.grey[300],
-                          borderRadius: BorderRadius.circular(8),
-                          image: const DecorationImage(
-                            image: AssetImage('assets/images/dummy_data/calculator.png'),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Calculator',
-                              style: GoogleFonts.plusJakartaSans(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                                color: const Color(0xFF1C140D),
-                                height: 24 / 16,
-                              ),
-                            ),
-                            Text(
-                              'Donated on 2024-05-15',
-                              style: GoogleFonts.plusJakartaSans(
-                                fontSize: 14,
-                                fontWeight: FontWeight.normal,
-                                color: const Color(0xFF99734D),
-                                height: 21 / 14,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-              ],
-
-              // Borrowings Items (when selected)
-              if (_selectedHistoryTab == 1) ...[
                 // Borrowed Laptop Item
                 Container(
                   padding: const EdgeInsets.all(16),
@@ -404,6 +352,58 @@ class _MyPageState extends State<MyPage> {
                             ),
                             Text(
                               'Borrowed on 2024-06-10',
+                              style: GoogleFonts.plusJakartaSans(
+                                fontSize: 14,
+                                fontWeight: FontWeight.normal,
+                                color: const Color(0xFF99734D),
+                                height: 21 / 14,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+              ],
+
+              // Donated Items (when selected)
+              if (_selectedHistoryTab == 1) ...[
+                // Calculator Item
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 56,
+                        height: 56,
+                        decoration: BoxDecoration(
+                          color: Colors.grey[300],
+                          borderRadius: BorderRadius.circular(8),
+                          image: const DecorationImage(
+                            image: AssetImage('assets/images/dummy_data/calculator.png'),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Calculator',
+                              style: GoogleFonts.plusJakartaSans(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                                color: const Color(0xFF1C140D),
+                                height: 24 / 16,
+                              ),
+                            ),
+                            Text(
+                              'Donated on 2024-05-15',
                               style: GoogleFonts.plusJakartaSans(
                                 fontSize: 14,
                                 fontWeight: FontWeight.normal,
